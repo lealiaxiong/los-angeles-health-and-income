@@ -3,4 +3,6 @@ MAINTAINER Lealia Xiong <lxiong@caltech.edu>
 
 COPY environment.yml .
 RUN \
-   conda env create -f environment.yml
+   conda init zsh \
+   && conda env create -f environment.yml \
+   && conda activate gis
