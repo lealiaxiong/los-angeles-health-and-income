@@ -4,12 +4,12 @@ MAINTAINER Lealia Xiong <lxiong@caltech.edu>
 
 FROM continuumio/miniconda3
 
+RUN conda update conda
+RUN pip install fiona
+RUN pip install pyproj shapely
+RUN pip install geopandas
 RUN conda install -c pyviz holoviz
 RUN conda install -c pyviz geoviews-core
-RUN conda install geopandas
-
-COPY . .
-CMD panel serve --address="0.0.0.0" --port=$PORT main.py --allow-websocket-origin=worldbank-climate-dashboard.herokuapp.com
 
 COPY . .
 
