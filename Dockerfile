@@ -1,13 +1,15 @@
 FROM continuumio/miniconda
 MAINTAINER Lealia Xiong <lxiong@caltech.edu>
 
-COPY environment.yml .
 
-RUN conda env create -f environment.yml
+FROM continuumio/miniconda3
 
-RUN echo "conda activate gis" >> ~/.bashrc
+RUN conda install -c pyviz holoviz
+RUN conda install -c pyviz geoviews-core
+RUN conda install geopandas
 
-SHELL ["/bin/bash", "--login", "-c"]
+COPY . .
+CMD panel serve --address="0.0.0.0" --port=$PORT main.py --allow-websocket-origin=worldbank-climate-dashboard.herokuapp.com
 
 COPY . .
 
